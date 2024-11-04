@@ -1,28 +1,112 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
+
+const _rules = {
+    'array-bracket-newline': [1, 'consistent'],
+    'array-bracket-spacing': [
+        1,
+        'never',
+        {
+            arraysInArrays: true,
+            objectsInArrays: false,
+        },
+    ],
+    'array-element-newline': [
+        0,
+        {
+            multiline: true,
+            minItems: 2,
+        },
+    ],
+    'arrow-parens': [2, 'always'],
+    curly: [1, 'multi-line'],
+    'class-methods-use-this': 0,
+    'indent': ['error', 4],
+    'keyword-spacing': [
+        2,
+        {
+            before: true,
+            after: true,
+            overrides: {
+                function: {
+                    after: false,
+                },
+                while: {
+                    after: false,
+                },
+            },
+        },
+    ],
+    'jsx-quotes': [2, 'prefer-double'],
+    'max-len': 0,
+    'no-case-declarations': 0,
+    'no-extraneous-imports': 0,
+    'no-inner-declarations': 0,
+    'no-prototype-builtins': 0,
+    'no-use-before-define': 0,
+    'no-undef': 1,
+    'no-unused-expressions': 0,
+    'no-unused-vars': 1,
+    'no-useless-escape': 0,
+    'object-curly-spacing': [1, 'always'],
+    'operator-linebreak': 0,
+    'prettier/prettier': 0,
+    semi: [1, 'always'],
+    'space-before-function-paren': 0,
+    'wrap-iife': [2, 'inside'],
+};
 
 export default tseslint.config(
-  { ignores: ['dist'] },
-  {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+    { ignores: ['dist'] },
+    {
+        extends: [js.configs.recommended, ...tseslint.configs.recommended],
+        files: ['**/*.{ts,tsx}'],
+        ignores: [
+            'build',
+            'coverage',
+            'dist',
+            'node_modules'
+        ],
+        languageOptions: {
+            ecmaVersion: 2020,
+            globals: {
+                ...globals.browser,
+                ...globals.jest,
+                ...globals['shared-node-browser'],
+            },
+            /**
+             * @description The type of JavaScript source code. Possible values are "script"
+             *  for traditional script files, "module" for ECMAScript modules (ESM), and
+             *  "commonjs" for CommonJS files. (default: "module" for .js and .mjs files;
+             *  "commonjs" for .cjs files)
+             */
+            sourceType: 'module',
+        },
+        plugins: {
+            'react-hooks': reactHooks,
+            'react-refresh': reactRefresh,
+        },
+        rules: {
+            ...reactHooks.configs.recommended.rules,
+            'react-refresh/only-export-components': [
+                'warn',
+                { allowConstantExport: true },
+            ],
+            ..._rules,
+        },
     },
-    plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-    },
-  },
-)
+    {},
+    {
+        files: [
+            'eslint.config.js',
+            'jest.config.js',
+        ],
+        rules: {
+            ..._rules,
+            'no-undef': 0,
+        }
+    }
+);
