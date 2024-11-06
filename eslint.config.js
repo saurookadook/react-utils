@@ -22,6 +22,7 @@ const _rules = {
         },
     ],
     'arrow-parens': [2, 'always'],
+    'comma-dangle': [2, 'always-multiline'],
     curly: [1, 'multi-line'],
     'class-methods-use-this': 0,
     'indent': ['error', 4],
@@ -68,7 +69,7 @@ export default tseslint.config(
             'build',
             'coverage',
             'dist',
-            'node_modules'
+            'node_modules',
         ],
         languageOptions: {
             ecmaVersion: 2020,
@@ -95,6 +96,7 @@ export default tseslint.config(
                 'warn',
                 { allowConstantExport: true },
             ],
+            'typescript-eslint/no-explicit-any': 1,
             ..._rules,
         },
     },
@@ -107,6 +109,23 @@ export default tseslint.config(
         rules: {
             ..._rules,
             'no-undef': 0,
-        }
-    }
+        },
+    },
+    {
+        files: ['.prettierrc.js'],
+        languageOptions: {
+            sourceType: 'commonjs',
+        },
+        rules: {
+            ..._rules,
+            'no-undef': 0,
+        },
+    },
+    // {
+    //     files: ['**/*.json'],
+    //     rules: {
+    //         'comma-dangle': ["error", "never"],
+    //         'indent': ['error', 4],
+    //     },
+    // },
 );
