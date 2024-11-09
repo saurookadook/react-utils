@@ -55,7 +55,7 @@ const _rules = {
     'object-curly-spacing': [1, 'always'],
     'operator-linebreak': 0,
     'prettier/prettier': 0,
-    semi: [1, 'always'],
+    semi: [2, 'always'],
     'space-before-function-paren': 0,
     'wrap-iife': [2, 'inside'],
 };
@@ -96,7 +96,7 @@ export default tseslint.config(
                 'warn',
                 { allowConstantExport: true },
             ],
-            'typescript-eslint/no-explicit-any': 1,
+            '@typescript-eslint/no-explicit-any': 1,
             ..._rules,
         },
     },
