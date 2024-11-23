@@ -11,10 +11,10 @@ export type GenericStateStore<V> = {
 };
 
 export type StateSlice = {
-    [key: string]: unknown;
+    [key: string]: any;
 };
 
-export type CombinedState = NullableObject<StateSlice>;
+export type CombinedState<S = StateSlice> = NullableObject<S> | object;
 
 export interface BaseReducerAction {
     type: string;
@@ -26,18 +26,26 @@ export type GenericReducerAction<T> = {
     payload?: T;
 };
 
-export type GenericReducerFunc<S = StateSlice, A = BaseReducerAction> = (state: S, action: A) => S;
+export type StateSliceReducerFunc =
+    (stateSlice: StateSlice, action: BaseReducerAction) => StateSlice;
 
-export type StateSliceReducerFunc = (state: StateSlice, action: BaseReducerAction) => StateSlice;
+export type GenericReducerFunc<
+    S = StateSlice,
+    A = BaseReducerAction
+> = (stateSlice: S, action: A) => S;
 
-export type GenericStateSliceReducer<S = StateSlice, A = BaseReducerAction> = [GenericReducerFunc<S, A>, S];
 
-export interface StateSliceReducer {
-    [key: string]: GenericStateSliceReducer;
+export type GenericStateSliceReducer<
+    S = StateSlice,
+    A = BaseReducerAction
+> = [GenericReducerFunc<S, A>, S];
+
+export interface StateSliceReducer<S, A> {
+    [key: string]: GenericStateSliceReducer<S, A>;
 }
 
-export type CombinedStateSliceReducer = [GenericReducerFunc, CombinedState];
+export type CombinedStateSliceReducer<S, A> = [GenericReducerFunc<S, A>, CombinedState];
 
-export interface FinalReducers {
-    [key: string]: GenericReducerFunc;
+export interface FinalReducers<S, A> {
+    [key: string]: GenericReducerFunc<S, A>;
 }

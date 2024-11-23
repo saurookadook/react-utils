@@ -17,10 +17,10 @@ import type {
  *      (i.e. feedback: feedbackReducer, question: questionReducer)
  * @returns {CombinedStateSliceReducer} Array with a combinedReducer function and combinedState
  */
-function combineReducers(reducers: StateSliceReducer): CombinedStateSliceReducer {
+function combineReducers<S extends object = StateSlice, A = BaseReducerAction>(reducers: StateSliceReducer<S, A>): CombinedStateSliceReducer<S, A> {
     const reducerKeys = Object.keys(reducers);
     const globalState: CombinedState = {};
-    const finalReducers: FinalReducers = {};
+    const finalReducers: FinalReducers<S, A> = {};
 
     reducerKeys.forEach((key) => {
         const [reducerFunction, reducerInitialState] = reducers[key];
@@ -34,20 +34,21 @@ function combineReducers(reducers: StateSliceReducer): CombinedStateSliceReducer
     const finalReducerKeys = Object.keys(finalReducers);
 
     return [
-        (state: StateSlice, action: BaseReducerAction): StateSlice => {
-            const newState: CombinedState = {};
+        (state: S, action: A): S => {
+            const newState: CombinedState<S> = {};
             let newStateForCurrentKey = {};
             let hasStateChanged = false;
 
             reducerKeys.forEach((key) => {
                 const currentReducer = finalReducers[key];
-                const previousStateForKey = typeof state === 'object' ? state[key] : {};
+                const previousStateForKey = typeof state === 'object' && state != null ? state[key] : {};
 
                 try {
                     newStateForCurrentKey = currentReducer(previousStateForKey, action);
                 } catch (e) {
                     console.error(
-                        `combineReducers: encountered error running reducer function for key: '${key}' and action: '${action?.type}'`,
+                        // @ts-expect-error: Not sure why the compiler can't resolve `action.type`...
+                        `combineReducers: encountered error running reducer function for key: '${key}' and action: '${action.type}'`,
                         e,
                     );
                     newStateForCurrentKey = previousStateForKey;
@@ -58,6 +59,7 @@ function combineReducers(reducers: StateSliceReducer): CombinedStateSliceReducer
             });
 
             hasStateChanged = hasStateChanged || finalReducerKeys.length !== Object.keys(state).length;
+            // @ts-expect-error: `hasStateChanged` is preventing the kind of issue with the return value type that the TypeScript compiler is yelling about
             return hasStateChanged ? newState : state;
         },
         globalState,
