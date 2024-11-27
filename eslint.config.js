@@ -25,7 +25,7 @@ const _rules = {
     'comma-dangle': [2, 'always-multiline'],
     curly: [1, 'multi-line'],
     'class-methods-use-this': 0,
-    'indent': ['error', 4],
+    'indent': [0, 4],
     'keyword-spacing': [
         2,
         {
