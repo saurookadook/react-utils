@@ -100,7 +100,13 @@ export default tseslint.config(
             ..._rules,
         },
     },
-    {},
+    {
+        files: ['**/*.d.ts'],
+        rules: {
+            ..._rules,
+            'no-unused-vars': 0,
+        },
+    },
     {
         files: [
             'eslint.config.js',
