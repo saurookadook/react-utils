@@ -1,51 +1,66 @@
-type AmbiguousObject = Record<string, any>;
 
-type NullableValue<V> = V | null;
+// Type definitions for [~THE LIBRARY NAME~] [~OPTIONAL VERSION NUMBER~]
+// Project: [~THE PROJECT NAME~]
+// Definitions by: Andy Maskiell <https://waitwut.xyz>
 
-type NullableObject<T> = {
-    [K in keyof T]: NullableValue<T[K]>;
-};
+// Note that ES6 modules cannot directly export class objects.
+// This file should be imported using the CommonJS-style:
+//   import x = require('[~THE MODULE~]');
+//
+// Alternatively, if --allowSyntheticDefaultImports or
+// --esModuleInterop is turned on, this file can also be
+// imported as a default import:
+//   import x from '[~THE MODULE~]';
+//
+// Refer to the TypeScript documentation at
+// https://www.typescriptlang.org/docs/handbook/modules.html#export--and-import--require
+// to understand common workarounds for this limitation of ES6 modules.
 
-export type GenericStateStore<V> = {
-    [K in keyof V]: V[K] | null;
-};
+import type { Reducer } from 'react';
 
-export type StateSlice = {
-    [key: string]: any;
-};
+export = CombineReducers;
 
-export type CombinedState<S = StateSlice> = NullableObject<S> | object;
+declare function CombineReducers<S>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.ReturnType<S>;
 
-export interface BaseReducerAction {
-    type: string;
-    payload?: StateSlice;
-}
+/*~ If you want to expose types from your module as well, you can
+ *~ place them in this block. Often you will want to describe the
+ *~ shape of the return type of the function; that type should
+ *~ be declared in here, as this example shows.
+ *~
+ *~ Note that if you decide to include this namespace, the module can be
+ *~ incorrectly imported as a namespace object, unless
+ *~ --esModuleInterop is turned on:
+ *~   import * as x from '[~THE MODULE~]'; // WRONG! DO NOT DO THIS!
+ */
+declare namespace CombineReducers {
+    export type AmbiguousObject = Record<string, any>;
 
-export type GenericReducerAction<T> = {
-    type: string;
-    payload?: T;
-};
+    export type StateSlice<S> = {
+        [K in keyof S]: S[K];
+    } | S;
 
-export type StateSliceReducerFunc =
-    (stateSlice: StateSlice, action: BaseReducerAction) => StateSlice;
+    export type ReducerAction<T> = {
+        type: string;
+        payload?: T;
+    };
 
-export type GenericReducerFunc<
-    S = StateSlice,
-    A = BaseReducerAction
-> = (stateSlice: S, action: A) => S;
+    export type ReducerFunc<T> = Reducer<T, ReducerAction<T>>
+
+    export type ArgsTuple<T> = [ReducerFunc<T>, T];
+
+    export type ReducersArg<S> = {
+        // [Slice in keyof S as string]: [ReducerFunc<S[Slice]>, S[Slice]];
+        [key: string]: ArgsTuple<S>;
+    }
+
+    export type ReturnType<S> = ArgsTuple<S>;
 
 
-export type GenericStateSliceReducer<
-    S = StateSlice,
-    A = BaseReducerAction
-> = [GenericReducerFunc<S, A>, S];
+    // TODO: maybe remove these?
+    type NullableValue<V> = V | null;
 
-export interface StateSliceReducer<S, A> {
-    [key: string]: GenericStateSliceReducer<S, A>;
-}
-
-export type CombinedStateSliceReducer<S, A> = [GenericReducerFunc<S, A>, CombinedState];
-
-export interface FinalReducers<S, A> {
-    [key: string]: GenericReducerFunc<S, A>;
+    type NullableObject<T> = {
+        [K in keyof T]: NullableValue<T[K]>;
+    };
+    // end TODO
 }
