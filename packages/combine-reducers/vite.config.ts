@@ -11,5 +11,13 @@ export default defineConfig({
             name: '@saurookadook/react-utils-combine-reducers',
             fileName: 'saurookadook-react-utils-combine-reducers',
         },
+        rollupOptions: {
+            external: ['react'],
+            output: {
+                globals: {
+                    react: 'React',
+                },
+            },
+        },
     },
 });
