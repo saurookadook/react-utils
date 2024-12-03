@@ -18,10 +18,6 @@
 
 import type { Reducer } from 'react';
 
-export = CombineReducers;
-
-declare function CombineReducers<S>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.ReturnType<S>;
-
 /*~ If you want to expose types from your module as well, you can
  *~ place them in this block. Often you will want to describe the
  *~ shape of the return type of the function; that type should
@@ -32,7 +28,8 @@ declare function CombineReducers<S>(reducers: CombineReducers.ReducersArg<S>): C
  *~ --esModuleInterop is turned on:
  *~   import * as x from '[~THE MODULE~]'; // WRONG! DO NOT DO THIS!
  */
-declare namespace CombineReducers {
+export declare namespace CombineReducers {
+    // export type AmbiguousObject<V = unknown> = Record<string, V>;
     export type AmbiguousObject = Record<string, any>;
 
     export type StateSlice<S> = {
@@ -41,16 +38,15 @@ declare namespace CombineReducers {
 
     export type ReducerAction<T> = {
         type: string;
-        payload?: T;
+        payload?: T | { [K in keyof T]: T[K] } | any; // TODO: short term fix
     };
 
-    export type ReducerFunc<T> = Reducer<T, ReducerAction<T>>
+    export type ReducerFunc<T, A = ReducerAction<T>> = Reducer<T, A>
 
-    export type ArgsTuple<T> = [ReducerFunc<T>, T];
+    export type ArgsTuple<T, A = ReducerAction<T>> = [ReducerFunc<T, A>, T];
 
     export type ReducersArg<S> = {
-        // [Slice in keyof S as string]: [ReducerFunc<S[Slice]>, S[Slice]];
-        [key: string]: ArgsTuple<S>;
+        [Slice in keyof S as string]: [ReducerFunc<S[Slice]>, S[Slice]];
     }
 
     export type ReturnType<S> = ArgsTuple<S>;

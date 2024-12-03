@@ -1,4 +1,4 @@
-import type CombineReducers from './index.d';
+import type { CombineReducers } from './index.d';
 
 // type FinalReducersFuncMap_PREFERRABLE<T> = {
 //     [K in keyof T as string]: CombineReducers.ReducerFunc<T[K]>;
@@ -36,6 +36,8 @@ function combineReducers<S extends CombineReducers.AmbiguousObject>(reducers: Co
         if (typeof reducerFunction !== 'function') {
             throw new TypeError(`in 'combineReducers' - reducer for ${key} must be a function!`);
         } else {
+            // TODO - I'm not sure why this is throwing an error about `S[string]` possibly being instantiated with a different subtype of `any`
+            // @ts-ignore
             finalReducers[key] = reducerFunction;
         }
         globalState[key] = reducerInitialState;
@@ -75,4 +77,5 @@ function combineReducers<S extends CombineReducers.AmbiguousObject>(reducers: Co
     ];
 }
 
+export { CombineReducers };
 export default combineReducers;
