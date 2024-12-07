@@ -17,6 +17,7 @@
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "preview": "vite preview",
+        "pkgs:prepublish": "lerna version --no-private",
         "test": "jest",
         "test:w": "jest --watchAll",
         "test:cov": "jest --coverage"
