@@ -96,6 +96,7 @@ export default tseslint.config(
                 'warn',
                 { allowConstantExport: true },
             ],
+            '@typescript-eslint/ban-ts-comment': 1,
             '@typescript-eslint/no-explicit-any': 1,
             ..._rules,
         },

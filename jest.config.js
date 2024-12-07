@@ -9,7 +9,10 @@ export default {
     },
     // setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
     // testEnvironment: "jsdom",
+    testPathIgnorePatterns: [
+        ".+\.d.ts",
+    ],
     transform: {
-        "^.+.tsx?$": ["ts-jest", {}],
+        "^.+\.tsx?$": ["ts-jest", {}],
     },
 };

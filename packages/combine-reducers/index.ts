@@ -1,11 +1,16 @@
-import type {
-    StateSlice,
-    CombinedState,
-    BaseReducerAction,
-    StateSliceReducer,
-    CombinedStateSliceReducer,
-    FinalReducers,
-} from './index.d';
+import type { CombineReducers } from './index.d';
+
+// type FinalReducersFuncMap_PREFERRABLE<T> = {
+//     [K in keyof T as string]: CombineReducers.ReducerFunc<T[K]>;
+// }
+
+type GlobalState<S> = {
+    [key: string]: CombineReducers.StateSlice<S>;
+}
+
+type FinalReducersFuncMap<S> = {
+    [key: string]: CombineReducers.ReducerFunc<S>;
+}
 
 /**
  * @description Utility function for combining individual reducer functions and \
@@ -17,16 +22,22 @@ import type {
  *      (i.e. feedback: feedbackReducer, question: questionReducer)
  * @returns {CombinedStateSliceReducer} Array with a combinedReducer function and combinedState
  */
-function combineReducers<S extends object = StateSlice, A = BaseReducerAction>(reducers: StateSliceReducer<S, A>): CombinedStateSliceReducer<S, A> {
+function combineReducers<S extends CombineReducers.AmbiguousObject>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.ReturnType<S> {
     const reducerKeys = Object.keys(reducers);
-    const globalState: CombinedState = {};
-    const finalReducers: FinalReducers<S, A> = {};
+    const globalState = {} as GlobalState<S>;
+    const finalReducers = {} as FinalReducersFuncMap<S>;
 
     reducerKeys.forEach((key) => {
+        if (!(key in reducers)) {
+            return;
+        }
+
         const [reducerFunction, reducerInitialState] = reducers[key];
         if (typeof reducerFunction !== 'function') {
             throw new TypeError(`in 'combineReducers' - reducer for ${key} must be a function!`);
         } else {
+            // TODO - I'm not sure why this is throwing an error about `S[string]` possibly being instantiated with a different subtype of `any`
+            // @ts-ignore
             finalReducers[key] = reducerFunction;
         }
         globalState[key] = reducerInitialState;
@@ -34,8 +45,9 @@ function combineReducers<S extends object = StateSlice, A = BaseReducerAction>(r
     const finalReducerKeys = Object.keys(finalReducers);
 
     return [
-        (state: S, action: A): S => {
-            const newState: CombinedState<S> = {};
+        // @ts-expect-error: TODO - need to find a way to correctly either infer the types of this function or cast them from the type parameter arg
+        (state, action) => {
+            const newState = {} as CombineReducers.AmbiguousObject;
             let newStateForCurrentKey = {};
             let hasStateChanged = false;
 
@@ -47,7 +59,6 @@ function combineReducers<S extends object = StateSlice, A = BaseReducerAction>(r
                     newStateForCurrentKey = currentReducer(previousStateForKey, action);
                 } catch (e) {
                     console.error(
-                        // @ts-expect-error: Not sure why the compiler can't resolve `action.type`...
                         `combineReducers: encountered error running reducer function for key: '${key}' and action: '${action.type}'`,
                         e,
                     );
@@ -59,11 +70,12 @@ function combineReducers<S extends object = StateSlice, A = BaseReducerAction>(r
             });
 
             hasStateChanged = hasStateChanged || finalReducerKeys.length !== Object.keys(state).length;
-            // @ts-expect-error: `hasStateChanged` is preventing the kind of issue with the return value type that the TypeScript compiler is yelling about
             return hasStateChanged ? newState : state;
         },
+        // @ts-expect-error: TODO - need to find a way to correctly either infer the types of this or cast them from the type parameter arg
         globalState,
     ];
 }
 
+export { CombineReducers };
 export default combineReducers;
