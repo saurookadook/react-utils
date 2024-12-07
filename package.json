@@ -18,6 +18,7 @@
         "lint": "eslint .",
         "preview": "vite preview",
         "pkgs:prepublish": "lerna version --no-private",
+        "pkgs:publish": "lerna publish from-package",
         "test": "jest",
         "test:w": "jest --watchAll",
         "test:cov": "jest --coverage"
