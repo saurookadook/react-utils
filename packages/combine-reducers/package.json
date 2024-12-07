@@ -42,7 +42,7 @@
         "typecheck": "tsc --noEmit && tsc --noEmit -p src/node",
         "lint": "eslint --cache --ext .ts src/**",
         "format": "prettier --write --cache --parser typescript \"src/**/*.ts\"",
-        "prepublishOnly": "npm run build"
+        "prepublishOnly": "pnpm build"
     },
     "peerDependencies": {
         "react": "^18.0.0",
