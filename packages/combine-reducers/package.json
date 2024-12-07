@@ -32,16 +32,16 @@
         "node": "^18.0.0 || >=20.0.0"
     },
     "scripts": {
-        "dev": "tsx scripts/dev.ts",
-        "build": "rimraf dist && pnpm build-bundle && pnpm build-types",
+        "build": "rimraf dist && tsc -b --verbose && pnpm vite build",
+        "build:vite-example": "rimraf dist && pnpm build-bundle && pnpm build-types",
         "build-bundle": "rollup --config rollup.config.ts --configPlugin esbuild",
         "build-types": "pnpm build-types-temp && pnpm build-types-roll && pnpm build-types-check",
         "build-types-temp": "tsc --emitDeclarationOnly --outDir temp -p src/node",
         "build-types-roll": "rollup --config rollup.dts.config.ts --configPlugin esbuild && rimraf temp",
         "build-types-check": "tsc --project tsconfig.check.json",
         "typecheck": "tsc --noEmit && tsc --noEmit -p src/node",
-        "lint": "eslint --cache --ext .ts src/**",
-        "format": "prettier --write --cache --parser typescript \"src/**/*.ts\"",
+        "lint": "eslint --cache --ext .ts ./",
+        "format": "prettier --write --cache --parser typescript \"./**/*.ts\"",
         "prepublishOnly": "pnpm build"
     },
     "peerDependencies": {
