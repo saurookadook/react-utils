@@ -3,6 +3,9 @@
     "version": "0.0.1",
     "author": "Andy Maskiell",
     "description": "A custom utility hook for getting the previous value of some variable within in a component.",
+    "publishConfig": {
+        "access": "public"
+    },
     "keywords": [
         "frontend",
         "react",
@@ -46,5 +49,6 @@
     "peerDependencies": {
         "react": "^18.0.0",
         "react-dom": "^18.0.0"
-    }
+    },
+    "gitHead": "acadf6e5a0a09bcd0b7434e471e362553fce79ab"
 }
