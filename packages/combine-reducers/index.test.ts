@@ -96,7 +96,7 @@ const mockPathnameReducer: CombinedLocalsStateSlice['pathname'] = [
     defaultPathnameStateSlice,
 ];
 
-// eslint-disable-next-line
+// @ts-ignore
 const nestedLocalsStateSlice = combineReducers({
     count: mockCountReducers,
     flashMessages: mockFlashMessagesReducer,
@@ -274,8 +274,7 @@ describe('combineReducers utility', () => {
         describe('handles problems as expected', () => {
             it('raises error for non-function reducers', () => {
                 expect(() => {
-                    // eslint-disable-next-line
-                    const [combinedWoopsReducer, combinedWoopsState] = combineReducers({
+                    combineReducers({
                         // @ts-expect-error: This test is literally testing for the situation of an incorrectly-typed reducer arg
                         woops: ['enchantment?', { excitedGreeting: 'enchantment!' }],
                     });

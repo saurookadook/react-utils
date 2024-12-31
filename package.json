@@ -1,12 +1,15 @@
 {
     "name": "react-utils",
     "version": "0.0.0",
-    "description": "",
+    "description": "A collection of utilities for use with React.",
     "engines": {
         "node": ">=20.0.0",
         "pnpm": ">=8.0.0"
     },
     "packageManager": "pnpm@8.15.1",
+    "workspaces": [
+        "packages/*"
+    ],
     "type": "module",
     "main": "index.js",
     "scripts": {
@@ -14,6 +17,8 @@
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "preview": "vite preview",
+        "pkgs:prepublish": "lerna version --no-private",
+        "pkgs:publish": "lerna publish from-package",
         "test": "jest",
         "test:w": "jest --watchAll",
         "test:cov": "jest --coverage"
@@ -35,7 +40,9 @@
         "eslint-plugin-react-refresh": "^0.4.14",
         "globals": "^15.11.0",
         "jest": "^29.7.0",
+        "lerna": "^8.1.9",
         "prettier": "^3.3.3",
+        "rimraf": "^6.0.1",
         "ts-jest": "^29.2.5",
         "typescript": "~5.6.2",
         "typescript-eslint": "^8.13.0",
