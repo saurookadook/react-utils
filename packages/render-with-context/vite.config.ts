@@ -7,8 +7,10 @@ export default defineConfig({
     build: {
         lib: {
             entry: path.resolve(__dirname, './lib/index.ts'),
-            name: '@saurookadook/react-utils-render-with-context',
-            fileName: 'saurookadook-react-utils-render-with-context',
+            name: 'renderWithContext',
+            fileName: 'index',
+            // name: '@saurookadook/react-utils-render-with-context',
+            // fileName: 'saurookadook-react-utils-render-with-context',
         },
         rollupOptions: {
             external: [
