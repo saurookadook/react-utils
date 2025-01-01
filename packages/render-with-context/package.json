@@ -1,4 +1,5 @@
 {
+    "private": true,
     "name": "@saurookkadookk/react-utils-render-with-context",
     "version": "0.0.1",
     "author": "Andy Maskiell <maskiella@gmail.com>",
@@ -31,6 +32,9 @@
     },
     "publishConfig": {
         "access": "public"
+    },
+    "devDependencies": {
+        "@saurookkadookk/react-utils-combine-reducers": "workspace:^"
     },
     "peerDependencies": {
         "@testing-library/react": "^16.0.0",
