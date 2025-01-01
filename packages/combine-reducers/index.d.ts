@@ -1,6 +1,6 @@
 
-// Type definitions for [~THE LIBRARY NAME~] [~OPTIONAL VERSION NUMBER~]
-// Project: [~THE PROJECT NAME~]
+// Type definitions for `@saurookkadookk/react-utils-combine-reducers` '0.1.0'
+// Project: `react-utils` <https://github.com/saurookadook/react-utils>
 // Definitions by: Andy Maskiell <https://waitwut.xyz>
 
 // Note that ES6 modules cannot directly export class objects.

@@ -77,5 +77,5 @@ function combineReducers<S extends CombineReducers.AmbiguousObject>(reducers: Co
     ];
 }
 
-export { CombineReducers };
+export { CombineReducers, combineReducers };
 export default combineReducers;

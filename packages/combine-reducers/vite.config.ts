@@ -7,9 +7,10 @@ export default defineConfig({
     build: {
         lib: {
             entry: path.resolve(__dirname, './index.ts'),
-            // name: 'combineReducers'
-            name: '@saurookadook/react-utils-combine-reducers',
-            fileName: 'saurookadook-react-utils-combine-reducers',
+            name: 'combineReducers',
+            fileName: 'index',
+            // name: '@saurookadook/react-utils-combine-reducers',
+            // fileName: 'saurookadook-react-utils-combine-reducers',
         },
         rollupOptions: {
             external: ['react'],
