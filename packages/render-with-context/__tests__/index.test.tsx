@@ -1,11 +1,15 @@
-/* eslint-disable react/prop-types */
-import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import * as React from 'react';
+const { createContext, useContext, useEffect, useReducer } = React;
 import { cleanup, screen, waitFor } from '@testing-library/react';
+import { combineReducers } from '@saurookkadookk/react-utils-combine-reducers';
 
-import { BaseReducerAction } from '@nlpssa-app-types/common/main';
-import { deeplyMerge } from 'client/common/utils';
-import { combineReducers } from 'client/common/store/utils';
+import { deeplyMerge } from '../lib/deeplyMerge';
 import renderWithContext from '../lib';
+
+type ReducerAction<T> = {
+    type: string;
+    payload?: T | { [K in keyof T]: T[K] } | any; // TODO: short term fix
+};
 
 const mockActions = {
     INCREMENT_COUNT: 'INCREMENT_COUNT',
@@ -23,7 +27,7 @@ const MockStateContext = createContext<MockStateStore>({
     pageData: {},
     user: {},
 });
-const MockDispatchContext = createContext<React.Dispatch<BaseReducerAction>>((action) => action);
+const MockDispatchContext = createContext<React.Dispatch<ReducerAction<any>>>((action) => action);
 
 const mockLocalsStateSlice = [
     (stateSlice, action) => {

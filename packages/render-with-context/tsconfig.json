@@ -1,10 +1,20 @@
 {
     "compilerOptions": {
+        "jsx": "react-jsx",
+        /* TODO: just temporary until I get around to fixing types */
+        "noImplicitAny": false,
         "outDir": "dist",
+        "types": [
+            // "@saurookkadookk/react-utils-combine-reducers",
+            "@testing-library/jest-dom",
+        ]
     },
     "extends": "../../tsconfig.lib.json",
     // "files": [
-    //     "index.d.ts",
-    //     "index.ts"
-    // ]
+    //     "lib/index.tsx"
+    // ],
+    "include": [
+        "__tests__/**/*",
+        "lib/**/*"
+    ]
 }
