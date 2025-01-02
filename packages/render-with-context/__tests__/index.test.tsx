@@ -3,8 +3,8 @@ const { createContext, useContext, useEffect, useReducer } = React;
 import { cleanup, screen, waitFor } from '@testing-library/react';
 import { combineReducers } from '@saurookkadookk/react-utils-combine-reducers';
 
-import { deeplyMerge } from '../lib/deeplyMerge';
-import renderWithContext from '../lib';
+import { deeplyMerge } from '../src/deeplyMerge';
+import renderWithContext from '../src';
 
 type ReducerAction<T> = {
     type: string;

@@ -4,6 +4,7 @@
         /* TODO: just temporary until I get around to fixing types */
         "noImplicitAny": false,
         "outDir": "dist",
+        "rootDir": "./",
         "types": [
             // "@saurookkadookk/react-utils-combine-reducers",
             "@testing-library/jest-dom",
@@ -11,10 +12,9 @@
     },
     "extends": "../../tsconfig.lib.json",
     // "files": [
-    //     "lib/index.tsx"
+    //     "src/*"
     // ],
     "include": [
-        "__tests__/**/*",
         "src/**/*"
     ]
 }

@@ -1,9 +1,14 @@
 {
     "compilerOptions": {
         "outDir": "dist",
+        "rootDir": "./"
     },
     "extends": "../../tsconfig.lib.json",
     "files": [
+        "index.d.ts",
+        "index.ts"
+    ],
+    "include": [
         "index.d.ts",
         "index.ts"
     ]
