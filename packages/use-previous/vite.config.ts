@@ -10,7 +10,7 @@ export default defineConfig({
             name: 'usePrevious',
             // fileName: 'index',
             fileName: (format, entryName) => {
-                console.log('    combineReducers    '.padStart(100, "=").padEnd(180, "="));
+                console.log('    usePrevious    '.padStart(100, "=").padEnd(180, "="));
                 console.log({ format, entryName });
                 let fileExtension = 'js';
                 switch (format) {

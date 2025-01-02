@@ -6,11 +6,11 @@ const __dirname = path.resolve();
 export default defineConfig({
     build: {
         lib: {
-            entry: path.resolve(__dirname, './lib/index.tsx'),
+            entry: path.resolve(__dirname, './src/index.tsx'),
             name: 'renderWithContext',
             // fileName: 'index',
             fileName: (format, entryName) => {
-                console.log('    combineReducers    '.padStart(100, "=").padEnd(180, "="));
+                console.log('    renderWithContext    '.padStart(100, "=").padEnd(180, "="));
                 console.log({ format, entryName });
                 let fileExtension = 'js';
                 switch (format) {

@@ -8,13 +8,13 @@
     "engines": {
         "node": "^18.0.0 || >=20.0.0"
     },
-    "main": "lib/index.tsx",
+    "main": "src/index.tsx",
     "directories": {
-        "lib": "lib",
+        "src": "src",
         "test": "__tests__"
     },
     "files": [
-        "lib"
+        "src"
     ],
     "exports": {
         ".": {
