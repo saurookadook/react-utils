@@ -17,6 +17,7 @@
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "preview": "vite preview",
+        "pkgs:build": "lerna run build --stream",
         "pkgs:prepublish": "lerna version --no-private",
         "pkgs:publish": "lerna publish from-package",
         "test": "jest",
