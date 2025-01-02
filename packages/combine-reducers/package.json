@@ -3,9 +3,11 @@
     "version": "0.1.0",
     "author": "Andy Maskiell",
     "description": "A utility, for use with React's `useReducer` hook, to combine multiple reducer functions into a single reducer function.",
-    "publishConfig": {
-        "access": "public"
+    "license": "MIT",
+    "engines": {
+        "node": "^18.0.0 || >=20.0.0"
     },
+    "main": "index.ts",
     "keywords": [
         "frontend",
         "react",
@@ -31,9 +33,6 @@
         },
         "./package.json": "./package.json"
     },
-    "engines": {
-        "node": "^18.0.0 || >=20.0.0"
-    },
     "scripts": {
         "build": "rimraf dist && tsc -b --verbose && pnpm vite build",
         "build:vite-example": "rimraf dist && pnpm build-bundle && pnpm build-types",
@@ -47,9 +46,20 @@
         "format": "prettier --write --cache --parser typescript \"./**/*.ts\"",
         "prepublishOnly": "pnpm build"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "peerDependencies": {
         "react": "^18.0.0",
         "react-dom": "^18.0.0"
+    },
+    "homepage": "https://github.com/saurookadook/react-utils/tree/main/packages/combine-reducers#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/saurookadook/react-utils.git"
+    },
+    "bugs": {
+        "url": "https://github.com/saurookadook/react-utils/issues"
     },
     "gitHead": "acadf6e5a0a09bcd0b7434e471e362553fce79ab"
 }

@@ -3,9 +3,11 @@
     "version": "0.0.1",
     "author": "Andy Maskiell",
     "description": "A custom utility hook for getting the previous value of some variable within in a component.",
-    "publishConfig": {
-        "access": "public"
+    "license": "MIT",
+    "engines": {
+        "node": "^18.0.0 || >=20.0.0"
     },
+    "main": "index.ts",
     "keywords": [
         "frontend",
         "react",
@@ -21,7 +23,7 @@
         ".": {
             "import": {
                 "types": "./dist/node/index.d.ts",
-                "default": "./dist/node/index.js"
+                "default": "./dist/node/index.mjs"
             },
             "require": {
                 "types": "./dist/node/index.d.cts",
@@ -29,9 +31,6 @@
             }
         },
         "./package.json": "./package.json"
-    },
-    "engines": {
-        "node": "^18.0.0 || >=20.0.0"
     },
     "scripts": {
         "build": "rimraf dist && tsc -b --verbose && pnpm vite build",
@@ -46,9 +45,20 @@
         "format": "prettier --write --cache --parser typescript \"./**/*.ts\"",
         "prepublishOnly": "pnpm build"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "peerDependencies": {
         "react": "^18.0.0",
         "react-dom": "^18.0.0"
+    },
+    "homepage": "https://github.com/saurookadook/react-utils/tree/main/packages/use-previous#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/saurookadook/react-utils.git"
+    },
+    "bugs": {
+        "url": "https://github.com/saurookadook/react-utils/issues"
     },
     "gitHead": "acadf6e5a0a09bcd0b7434e471e362553fce79ab"
 }

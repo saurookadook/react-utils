@@ -18,4 +18,5 @@ function usePrevious(value: ArgValue): ArgValue {
     return ref.current;
 }
 
+export { usePrevious };
 export default usePrevious;
