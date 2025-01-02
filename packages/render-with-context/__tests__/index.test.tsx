@@ -4,7 +4,7 @@ import { cleanup, screen, waitFor } from '@testing-library/react';
 import { combineReducers } from '@saurookkadookk/react-utils-combine-reducers';
 
 import { deeplyMerge } from '../src/deeplyMerge';
-import renderWithContext from '../src';
+import renderWithContext from '../src/index';
 
 type ReducerAction<T> = {
     type: string;

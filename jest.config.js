@@ -8,12 +8,12 @@ export default {
         "^.+\\.svg$": "jest-transformer-svg",
     },
     preset: "ts-jest",
-    // setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
+    setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
     testEnvironment: "jsdom",
     testPathIgnorePatterns: [
         ".+\.d.ts",
     ],
     transform: {
-        "^.+\.(ts|tsx)$": ["ts-jest", {}],
+        "^.+\.(ts|tsx)$": ["ts-jest", { tsconfig: './tsconfig.json' }],
     },
 };
