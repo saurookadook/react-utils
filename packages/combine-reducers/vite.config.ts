@@ -6,7 +6,7 @@ const __dirname = path.resolve();
 export default defineConfig({
     build: {
         lib: {
-            entry: path.resolve(__dirname, './index.ts'),
+            entry: path.resolve(__dirname, './src/index.ts'),
             name: 'combineReducers',
             // fileName: 'index',
             fileName: (format, entryName) => {
