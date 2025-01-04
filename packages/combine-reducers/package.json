@@ -7,7 +7,7 @@
     "engines": {
         "node": "^18.0.0 || >=20.0.0"
     },
-    "main": "index.ts",
+    "main": "src/index.ts",
     "keywords": [
         "frontend",
         "react",

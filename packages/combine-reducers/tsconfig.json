@@ -1,15 +1,13 @@
 {
     "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "dist/types",
+        "declarationMap": true,
         "outDir": "dist",
         "rootDir": "./"
     },
     "extends": "../../tsconfig.lib.json",
-    "files": [
-        "index.d.ts",
-        "index.ts"
-    ],
     "include": [
-        "index.d.ts",
-        "index.ts"
+        "src/index.ts"
     ]
 }
