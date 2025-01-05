@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars,@typescript-eslint/no-unused-vars */
 import combineReducers, { type CombineReducers } from './index';
 
 const mockActions = {
