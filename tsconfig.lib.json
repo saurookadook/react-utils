@@ -4,12 +4,12 @@
         "packages"
     ],
     "exclude": [
-        "**/vite.config.ts"
+        "**/vite.config.ts",
     ],
     "compilerOptions": {
         "rootDir": "packages/",
-        "declaration": true,
-        "declarationMap": true,
+        // "declaration": true,
+        // "declarationMap": true,
         "lib": [
             "ES2020",
             "DOM",

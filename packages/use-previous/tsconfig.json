@@ -1,7 +1,11 @@
 {
     "compilerOptions": {
         "outDir": "dist",
-        "rootDir": "./"
+        "rootDir": "./",
+        "typeRoots": [
+            "../../node_modules/@types",
+            "./dist/types"
+        ]
     },
     "extends": "../../tsconfig.lib.json",
     "files": [
