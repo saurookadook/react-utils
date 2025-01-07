@@ -1,5 +1,7 @@
 import path from 'path';
 import { defineConfig } from 'vite';
+import typescript from 'rollup-plugin-typescript2';
+import dts from 'vite-plugin-dts';
 
 const __dirname = path.resolve();
 
@@ -8,8 +10,8 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, './src/index.ts'),
             name: 'combineReducers',
-            // fileName: 'index',
             fileName: (format, entryName) => {
+                const trimmedEntryName = entryName.replace(/\.\w+?$/gim, '');
                 console.log('    combineReducers    '.padStart(100, "=").padEnd(180, "="));
                 console.log({ format, entryName });
                 let fileExtension = 'js';
@@ -25,8 +27,8 @@ export default defineConfig({
                         break;
                 }
 
-                const finalFileName = `${entryName}.${fileExtension}`;
-                console.log({ finalFileName, format, entryName });
+                const finalFileName = `${trimmedEntryName}.${fileExtension}`;
+                console.log({ finalFileName, format, entryName, trimmedEntryName });
                 console.log(''.padStart(180, "="));
                 return finalFileName;
             },
@@ -41,6 +43,22 @@ export default defineConfig({
                     react: 'React',
                 },
             },
+            plugins: [
+                typescript({
+                    // check: true,
+                    tsconfig: path.resolve(__dirname, 'tsconfig.json'),
+                    // tsconfigOverride: {
+                    //     compilerOptions: {
+                    //         declaration: true,
+                    //         declarationMap: true,
+                    //         sourceMap: false,
+                    //     },
+                    //     exclude: ['**/__tests__'],
+                    // },
+                    useTsconfigDeclarationDir: true,
+                }),
+            ],
         },
     },
+    plugins: [dts({ include: 'src' })],
 });
