@@ -1,4 +1,4 @@
-import combineReducers, { type CombineReducers } from './index';
+import combineReducers, { type CombineReducers } from '../index';
 
 const mockActions = {
     INCREMENT_COUNT: 'INCREMENT_COUNT',
