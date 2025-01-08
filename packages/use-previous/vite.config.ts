@@ -1,3 +1,6 @@
+/**
+ * NOTE: It'd be ideal if this configuration worked...
+ */
 import path from 'path';
 import { defineConfig } from 'vite';
 
