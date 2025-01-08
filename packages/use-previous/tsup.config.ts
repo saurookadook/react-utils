@@ -5,6 +5,20 @@ const sharedConfig: Options = {
     dts: true, // Generate declaration files (.d.ts)
     entryPoints: ['./src/index.ts'],
     external: ['react'],
+    /**
+     * @todo Implement this once declaration files are supported
+     * @see {@link https://github.com/egoist/tsup/pull/1235 | tsup/pull/1235}
+     */
+    // outExtension({ format }) {
+    //     switch (format) {
+    //         case 'cjs':
+    //             return { js: '.cjs', dts: '.d.cts' };
+    //         case 'esm':
+    //             return { js: '.js', dts: '.d.ts' };
+    //         default:
+    //             return { js: '.mjs', dts: '.d.mts' };
+    //     }
+    // },
     sourcemap: true,
     /**
      * This option fixes a weird bug with resolution of default exports
