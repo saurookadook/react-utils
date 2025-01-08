@@ -120,9 +120,9 @@ export default tseslint.config(
     },
     {
         files: ['.prettierrc.js'],
-        languageOptions: {
-            sourceType: 'commonjs',
-        },
+        // languageOptions: {
+        //     sourceType: 'commonjs',
+        // },
         rules: {
             ..._rules,
             'no-undef': 0,
