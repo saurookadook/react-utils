@@ -1,6 +1,6 @@
 const plugins = [];
 
-module.exports = {
+export default {
     arrowParens: 'always',
     bracketSameLine: false,
     multilineArraysWrapThreshold: 2,
