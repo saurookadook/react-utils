@@ -4,6 +4,8 @@
         "packages"
     ],
     "exclude": [
+        "**/__tests__/",
+        "**/*.test.{ts,tsx}",
         "**/vite.config.ts"
     ],
     "compilerOptions": {
