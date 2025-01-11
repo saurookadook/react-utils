@@ -25,6 +25,8 @@
         "test:cov": "jest --coverage"
     },
     "dependencies": {
+        "@saurookkadookk/react-utils-combine-reducers": "workspace:^",
+        "@saurookkadookk/react-utils-use-previous": "workspace:^",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "react-router-dom": "^6.28.0"
