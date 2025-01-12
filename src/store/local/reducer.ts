@@ -2,7 +2,7 @@ import combineReducers, { type CombineReducers } from '@saurookkadookk/react-uti
 
 import { INCREMENT_COUNTER, DECREMENT_COUNTER, SET_GREETING } from "@src/constants";
 
-type LocalStateSlice = {
+export type LocalStateSlice = {
     counter: number;
     greeting: string;
 }
@@ -44,6 +44,11 @@ const greeting: CombinedLocalStateSlice['greeting'] = [
     },
     defaultGreetingStateSlice,
 ];
+
+export const initialLocalStateSlice = {
+    counter: defaultCounterStateSlice,
+    greeting: defaultGreetingStateSlice,
+};
 
 export default combineReducers({
     counter,

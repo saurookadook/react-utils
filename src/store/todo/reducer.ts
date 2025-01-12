@@ -6,11 +6,16 @@ import {
     REMOVE_TODO_ITEMS,
 } from "@src/constants";
 
-type TodoStateSlice = {
+export type TodoStateSlice = {
     todoItems: string[];
 }
 
-type TodoItemsAction = CombineReducers.ReducerAction<{ todoItem?: TodoStateSlice['todoItems'][0] }>
+type TodoItemsAction = CombineReducers.ReducerAction<
+    {
+        todoItem?: TodoStateSlice['todoItems'][0],
+        todoItemIndex?: number
+    }
+>
 
 type CombinedTodoStateSlice = {
     todoItems: CombineReducers.ArgsTuple<TodoStateSlice['todoItems'], TodoItemsAction>;
@@ -26,7 +31,8 @@ const todoItems: CombinedTodoStateSlice['todoItems'] = [
                 return stateSlice;
             // return [...stateSlice, action.payload];
             case REMOVE_TODO_ITEMS:
-                stateSlice.pop();
+                stateSlice.splice(action.payload.todoItemIndex, 1);
+                // stateSlice.pop();
                 return stateSlice;
             // return [...stateSlice.slice(0, -1)];
             case CLEAR_TODO_ITEMS:
@@ -37,6 +43,10 @@ const todoItems: CombinedTodoStateSlice['todoItems'] = [
     },
     defaultTodoItemsStateSlice,
 ];
+
+export const initialTodoStateSlice = {
+    todoItems: defaultTodoItemsStateSlice,
+};
 
 export default combineReducers({
     todoItems,

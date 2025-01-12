@@ -1,9 +1,19 @@
-import combineReducers from '@saurookkadookk/react-utils-combine-reducers';
+import combineReducers, { type CombineReducers } from '@saurookkadookk/react-utils-combine-reducers';
 
-import localReducer from '@src/store/local/reducer';
-import todoReducer from '@src/store/todo/reducer';
+import localReducer, { type LocalStateSlice, initialLocalStateSlice } from '@src/store/local/reducer';
+import todoReducer, { type TodoStateSlice, initialTodoStateSlice } from '@src/store/todo/reducer';
 
-export default combineReducers({
+export type AppState = CombineReducers.AmbiguousObject & {
+    local: LocalStateSlice;
+    todo: TodoStateSlice;
+}
+
+export const initialAppState = {
+    local: initialLocalStateSlice,
+    todo: initialTodoStateSlice,
+};
+
+export default combineReducers<AppState>({
     local: localReducer,
     todo: todoReducer,
 });

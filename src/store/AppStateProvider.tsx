@@ -2,9 +2,13 @@ import * as React from 'react';
 import { useReducer } from 'react';
 
 import { AppStateContext, AppDispatchContext } from '@src/store/contexts';
+import combinedReducer from '@src/store/reducer';
 import { deeplyMerge } from '@src/utils';
 
-function AppStateProvider({ children, initialState = {} }: {
+function AppStateProvider({
+    children,
+    initialState = {},
+}: {
     children: React.ReactElement;
     initialState?: any;
 }) {
