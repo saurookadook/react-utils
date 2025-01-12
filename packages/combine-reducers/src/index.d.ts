@@ -18,6 +18,10 @@
 
 import type { Reducer } from 'react';
 
+export = CombineReducers;
+
+declare function CombineReducers<S extends CombineReducers.AmbiguousObject>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.ReturnType<S>;
+
 /*~ If you want to expose types from your module as well, you can
  *~ place them in this block. Often you will want to describe the
  *~ shape of the return type of the function; that type should
@@ -28,7 +32,7 @@ import type { Reducer } from 'react';
  *~ --esModuleInterop is turned on:
  *~   import * as x from '[~THE MODULE~]'; // WRONG! DO NOT DO THIS!
  */
-export declare namespace CombineReducers {
+declare namespace CombineReducers {
     // export type AmbiguousObject<V = unknown> = Record<string, V>;
     export type AmbiguousObject = Record<string, any>;
 
