@@ -1,4 +1,4 @@
-import * as combineReducers from '@saurookkadookk/react-utils-combine-reducers';
+import combineReducers, { type CombineReducers } from '@saurookkadookk/react-utils-combine-reducers';
 
 import {
     ADD_TODO_ITEMS,
@@ -6,9 +6,19 @@ import {
     REMOVE_TODO_ITEMS,
 } from "@src/constants";
 
+type TodoStateSlice = {
+    todoItems: string[];
+}
+
+type TodoItemsAction = CombineReducers.ReducerAction<{ todoItem?: TodoStateSlice['todoItems'][0] }>
+
+type CombinedTodoStateSlice = {
+    todoItems: CombineReducers.ArgsTuple<TodoStateSlice['todoItems'], TodoItemsAction>;
+}
+
 const defaultTodoItemsStateSlice: string[] = [];
 
-const todoItems = [
+const todoItems: CombinedTodoStateSlice['todoItems'] = [
     (stateSlice, action) => {
         switch (action.type) {
             case ADD_TODO_ITEMS:

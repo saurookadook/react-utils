@@ -1,10 +1,23 @@
-import combineReducers from '@saurookkadookk/react-utils-combine-reducers';
+import combineReducers, { type CombineReducers } from '@saurookkadookk/react-utils-combine-reducers';
 
 import { INCREMENT_COUNTER, DECREMENT_COUNTER, SET_GREETING } from "@src/constants";
 
-const defaultCounterStateSlice = 0;
+type LocalStateSlice = {
+    counter: number;
+    greeting: string;
+}
 
-const counter = [
+type CounterAction = CombineReducers.ReducerAction<{ counter?: LocalStateSlice['counter'] }>
+type GreetingAction = CombineReducers.ReducerAction<{ greeting?: LocalStateSlice['greeting'] }>
+
+type CombinedLocalStateSlice = {
+    counter: CombineReducers.ArgsTuple<LocalStateSlice['counter'], CounterAction>;
+    greeting: CombineReducers.ArgsTuple<LocalStateSlice['greeting'], GreetingAction>;
+}
+
+const defaultCounterStateSlice: LocalStateSlice['counter'] = 0;
+
+const counter: CombinedLocalStateSlice['counter'] = [
     (stateSlice, action) => {
         switch (action.type) {
             case INCREMENT_COUNTER:
@@ -18,9 +31,9 @@ const counter = [
     defaultCounterStateSlice,
 ];
 
-const defaultGreetingStateSlice = 'Hello, world!';
+const defaultGreetingStateSlice: LocalStateSlice['greeting'] = 'Hello, world!';
 
-const greeting = [
+const greeting: CombinedLocalStateSlice['greeting'] = [
     (stateSlice, action) => {
         switch (action.type) {
             case SET_GREETING:
