@@ -1,7 +1,5 @@
 {
     "compilerOptions": {
-        "declarationDir": "./dist/types",
-        "moduleResolution": "bundler",
         "outDir": "./dist",
         "rootDir": "./src"
     },
