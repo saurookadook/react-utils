@@ -27,14 +27,15 @@ const todoItems: CombinedTodoStateSlice['todoItems'] = [
     (stateSlice, action) => {
         switch (action.type) {
             case ADD_TODO_ITEMS:
-                stateSlice.push(action.payload.todoItem);
-                return stateSlice;
-            // return [...stateSlice, action.payload];
+                return [...stateSlice, action.payload.todoItem];
             case REMOVE_TODO_ITEMS:
-                stateSlice.splice(action.payload.todoItemIndex, 1);
-                // stateSlice.pop();
-                return stateSlice;
-            // return [...stateSlice.slice(0, -1)];
+                // TODO: I feel like this SHOULD work...
+                // stateSlice.splice(action.payload.todoItemIndex, 1);
+                // return stateSlice;
+                return [
+                    ...stateSlice.slice(0, action.payload.todoItemIndex + 1),
+                    ...stateSlice.slice(action.payload.todoItemIndex + 2),
+                ];
             case CLEAR_TODO_ITEMS:
                 return [];
             default:
