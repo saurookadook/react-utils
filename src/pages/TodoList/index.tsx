@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { useContext, useState } from 'react';
 
+import { FlexColumn } from '@src/layouts';
 import { addTodoItem, clearTodoItems, removeTodoItem } from '@src/store/todo/actions';
 import { AppStateContext, AppDispatchContext } from '@src/store';
+import './styles.css';
 
 const ListHeading = ({
     itemCount,
@@ -13,13 +15,11 @@ const ListHeading = ({
         (count === 1 ? word : `${word}s`);
 
     return (
-        <div id="empty-todos">
-            <h2>
-                {itemCount > 0
-                    ? `You have ${itemCount} ${pluralize(itemCount, 'item')} on your To-Do list`
-                    : `To-Do list is empty`}
-            </h2>
-        </div>
+        <h2>
+            {itemCount > 0
+                ? `You have ${itemCount} ${pluralize(itemCount, 'item')} on your To-Do list`
+                : `To-Do list is empty`}
+        </h2>
     );
 };
 
@@ -53,26 +53,29 @@ const TodoList = () => {
                 ))}
             </ul>
 
-            <button onClick={() => clearTodoItems({ dispatch: appDispatch })}>
-                {`Clear All Items`}
-            </button>
+            <FlexColumn>
+                <button onClick={() => clearTodoItems({ dispatch: appDispatch })}>
+                    {`Clear All Items`}
+                </button>
 
-            <input
-                type="text"
-                placeholder="Add a new to-do item and press 'Enter' to submit"
-                value={todoInputValue}
-                onChange={(event) => setTodoInputValue(event.currentTarget.value)}
-                onKeyDown={(event) => {
-                    if (event.key === 'Enter') {
-                        addTodoItem({
-                            dispatch: appDispatch,
-                            todoItem: event.currentTarget.value,
-                        });
+                <input
+                    type="text"
+                    placeholder="Add a new to-do item and press 'Enter' to submit"
+                    value={todoInputValue}
+                    onChange={(event) => setTodoInputValue(event.currentTarget.value)}
+                    onKeyDown={(event) => {
+                        if (event.key === 'Enter' && todoInputValue != '') {
+                            // event.stopPropagation();
+                            setTodoInputValue('');
+                            addTodoItem({
+                                dispatch: appDispatch,
+                                todoItem: todoInputValue,
+                            });
 
-                        return setTodoInputValue('');
-                    }
-                }}
-            />
+                        }
+                    }}
+                />
+            </FlexColumn>
         </section>
     );
 };
