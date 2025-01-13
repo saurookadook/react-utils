@@ -1,11 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
 
 import { routerConfig } from "@src/app/browserRouter";
+import './styles.css';
 
 function Root() {
     return (
         <div id="root-layout">
-            <nav>
+            <nav className="top-nav-bar">
                 <ul>
                     {routerConfig[0].children.map((config, index) => {
                         return (
