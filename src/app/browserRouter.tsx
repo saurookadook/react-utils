@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import Root from '@src/layouts/Root';
-import { Home } from '@src/pages';
+import { Home, TodoList } from '@src/pages';
 
 export const routerConfig = [
     {
@@ -10,7 +10,13 @@ export const routerConfig = [
         children: [
             {
                 path: 'home',
+                label: 'Home',
                 element: <Home />,
+            },
+            {
+                path: 'todo-list',
+                label: 'To-Do List',
+                element: <TodoList />,
             },
         ],
     },

@@ -1,0 +1,11 @@
+// local
+export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
+export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+
+export const SET_GREETING = 'SET_GREETING';
+
+// todo
+export const ADD_TODO_ITEMS = 'ADD_TODO_ITEMS';
+export const CLEAR_TODO_ITEMS = 'CLEAR_TODO_ITEMS';
+export const REMOVE_TODO_ITEMS = 'REMOVE_TODO_ITEMS';
+

@@ -1,12 +1,13 @@
 {
     "name": "@saurookkadookk/react-utils-use-previous",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "author": "Andy Maskiell",
     "description": "A custom utility hook for getting the previous value of some variable within in a component.",
-    "types": "dist/esm/index.d.mts",
-    "browser": "dist/esm/index.mjs",
-    "main": "dist/commonjs/index.js",
-    "module": "dist/esm/index.mjs",
+    "type": "module",
+    "types": "dist/esm/index.d.ts",
+    "browser": "dist/esm/index.js",
+    "main": "dist/commonjs/index.cjs",
+    "module": "dist/esm/index.js",
     "publishConfig": {
         "access": "public"
     },
@@ -24,12 +25,12 @@
     "exports": {
         ".": {
             "import": {
-                "types": "./dist/esm/index.d.mts",
-                "default": "./dist/esm/index.mjs"
+                "types": "./dist/esm/index.d.ts",
+                "default": "./dist/esm/index.js"
             },
             "require": {
-                "types": "./dist/commonjs/index.d.ts",
-                "default": "./dist/commonjs/index.js"
+                "types": "./dist/commonjs/index.d.cts",
+                "default": "./dist/commonjs/index.cjs"
             }
         },
         "./package.json": "./package.json"

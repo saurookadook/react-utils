@@ -3,6 +3,7 @@
     "compilerOptions": {
         "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
         "baseUrl": "./",
+        "jsx": "react-jsx",
         "lib": [
             "ES2020",
             "DOM",
@@ -16,8 +17,11 @@
         },
         "skipLibCheck": true,
         "target": "ES2020",
+        // "typesRoots": [
+        //     "./node_modules/@types",
+        //     "./node_modules/@src"
+        // ]
         "useDefineForClassFields": true,
-        "jsx": "react-jsx"
     },
     "include": [
         "src"

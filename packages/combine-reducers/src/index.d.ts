@@ -18,6 +18,10 @@
 
 import type { Reducer } from 'react';
 
+export = combineReducers;
+
+declare function combineReducers<S extends CombineReducers.AmbiguousObject>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.ReturnType<S>;
+
 /*~ If you want to expose types from your module as well, you can
  *~ place them in this block. Often you will want to describe the
  *~ shape of the return type of the function; that type should
