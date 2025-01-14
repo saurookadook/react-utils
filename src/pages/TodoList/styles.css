@@ -7,6 +7,17 @@
 
     & ul {
         list-style-type: none;
-        width:
+        width: 100%;
+    }
+
+    & .flex-column {
+        background-color: #AEAEAE;
+        border-radius: 0.25rem;
+        padding: 2rem;
+        row-gap: 1rem;
+
+        & input {
+            width: 20rem;
+        }
     }
 }
