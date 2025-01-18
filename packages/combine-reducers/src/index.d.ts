@@ -1,4 +1,3 @@
-
 // Type definitions for [~THE LIBRARY NAME~] [~OPTIONAL VERSION NUMBER~]
 // Project: [~THE PROJECT NAME~]
 // Definitions by: Andy Maskiell <https://waitwut.xyz>
@@ -20,7 +19,7 @@ import type { Reducer } from 'react';
 
 export = combineReducers;
 
-declare function combineReducers<S extends CombineReducers.AmbiguousObject>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.ReturnType<S>;
+declare function combineReducers<S extends CombineReducers.AmbiguousObject>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.TypedReturn<S>;
 
 /*~ If you want to expose types from your module as well, you can
  *~ place them in this block. Often you will want to describe the
@@ -53,7 +52,7 @@ export declare namespace CombineReducers {
         [Slice in keyof S as string]: [ReducerFunc<S[Slice]>, S[Slice]];
     }
 
-    export type ReturnType<S> = ArgsTuple<S>;
+    export type TypedReturn<S> = ArgsTuple<S>;
 
 
     // TODO: maybe remove these?

@@ -22,7 +22,9 @@ type FinalReducersFuncMap<S> = {
  *      (i.e. feedback: feedbackReducer, question: questionReducer)
  * @returns {CombinedStateSliceReducer} Array with a combinedReducer function and combinedState
  */
-function combineReducers<S extends CombineReducers.AmbiguousObject>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.ReturnType<S> {
+function combineReducers<S extends CombineReducers.AmbiguousObject>(
+    reducers: CombineReducers.ReducersArg<S>,
+): CombineReducers.TypedReturn<S> {
     const reducerKeys = Object.keys(reducers);
     const globalState = {} as GlobalState<S>;
     const finalReducers = {} as FinalReducersFuncMap<S>;
