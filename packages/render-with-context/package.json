@@ -1,7 +1,6 @@
 {
-    "private": true,
     "name": "@saurookkadookk/react-utils-render-with-context",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "author": "Andy Maskiell <maskiella@gmail.com>",
     "description": "Testing utility for rendering stateful components with Testing Library",
     "type": "module",
@@ -39,7 +38,9 @@
         "node": "^18.0.0 || >=20.0.0"
     },
     "scripts": {
-        "build": "rimraf dist && tsc -b --verbose && pnpm vite build",
+        "build": "pnpm build:tsup",
+        "build:tsup": "rimraf dist && tsup ./src/index.ts",
+        "build:vite": "rimraf dist && tsc -b --verbose && pnpm vite build",
         "build:vite-example": "rimraf dist && pnpm build-bundle && pnpm build-types",
         "build-bundle": "rollup --config rollup.config.ts --configPlugin esbuild",
         "build-types": "pnpm build-types-temp && pnpm build-types-roll && pnpm build-types-check",

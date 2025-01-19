@@ -47,6 +47,7 @@
     "scripts": {
         "build": "pnpm build:tsup",
         "build:tsup": "rimraf dist && tsup ./src/index.ts",
+        "build:vite": "rimraf dist && tsc -b --verbose && pnpm vite build",
         "build:vite-example": "rimraf dist && pnpm build-bundle && pnpm build-types",
         "build-bundle": "rollup --config rollup.config.ts --configPlugin esbuild",
         "build-types": "pnpm build-types-temp && pnpm build-types-roll && pnpm build-types-check",
