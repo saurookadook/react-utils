@@ -3,7 +3,8 @@
         "jsx": "react-jsx",
         /* TODO: just temporary until I get around to fixing types */
         "noImplicitAny": false,
-        "outDir": "dist",
+        "outDir": "./dist",
+        "rootDir": "./src",
         "types": [
             // "@saurookkadookk/react-utils-combine-reducers",
             "@testing-library/jest-dom",
@@ -13,8 +14,10 @@
     // "files": [
     //     "lib/index.tsx"
     // ],
+    "exclude": [
+        "**/__tests__/**",
+    ],
     "include": [
-        "__tests__/**/*",
-        "lib/**/*"
+        "src"
     ]
 }

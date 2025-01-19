@@ -4,19 +4,19 @@
     "version": "0.0.1",
     "author": "Andy Maskiell <maskiella@gmail.com>",
     "description": "Testing utility for rendering stateful components with Testing Library",
-    "homepage": "https://github.com/saurookadook/react-utils/tree/main/packages/render-with-context#readme",
-    "license": "MIT",
-    "engines": {
-        "node": "^18.0.0 || >=20.0.0"
+    "type": "module",
+    "types": "dist/esm/index.d.ts",
+    "browser": "dist/esm/index.js",
+    "module": "dist/esm/index.js",
+    "main": "dist/commonjs/index.cjs",
+    "publishConfig": {
+        "access": "public"
     },
-    "main": "index.ts",
+    "license": "MIT",
     "directories": {
-        "lib": "lib",
+        "src": "src",
         "test": "__tests__"
     },
-    "files": [
-        "lib"
-    ],
     "exports": {
         ".": {
             "import": {
@@ -30,17 +30,13 @@
         },
         "./package.json": "./package.json"
     },
-    "publishConfig": {
-        "access": "public"
-    },
-    "devDependencies": {
-        "@saurookkadookk/react-utils-combine-reducers": "workspace:^"
-    },
-    "peerDependencies": {
-        "@testing-library/react": "^16.0.0",
-        "@testing-library/user-event": "^14.0.0",
-        "react": "^18.0.0",
-        "react-dom": "^18.0.0"
+    "files": [
+        "dist",
+        "src",
+        "./package.json"
+    ],
+    "engines": {
+        "node": "^18.0.0 || >=20.0.0"
     },
     "scripts": {
         "build": "rimraf dist && tsc -b --verbose && pnpm vite build",
@@ -55,6 +51,16 @@
         "format": "prettier --write --cache --parser typescript \"./**/*.ts\"",
         "prepublishOnly": "pnpm build"
     },
+    "devDependencies": {
+        "@saurookkadookk/react-utils-combine-reducers": "workspace:^"
+    },
+    "peerDependencies": {
+        "@testing-library/react": "^16.0.0",
+        "@testing-library/user-event": "^14.0.0",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0"
+    },
+    "homepage": "https://github.com/saurookadook/react-utils/tree/main/packages/render-with-context#readme",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/saurookadook/react-utils.git"
