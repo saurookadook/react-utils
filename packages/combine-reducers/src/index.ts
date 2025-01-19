@@ -1,4 +1,4 @@
-import type { CombineReducers } from './index.d';
+import type CombineReducers from './index.d';
 
 // type FinalReducersFuncMap_PREFERRABLE<T> = {
 //     [K in keyof T as string]: CombineReducers.ReducerFunc<T[K]>;

@@ -19,9 +19,9 @@ import type { ReactElement } from 'react';
 import { type RenderResult, RenderOptions } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-export = renderWithContext;
+export = RenderWithContext;
 
-declare function renderWithContext<
+declare function RenderWithContext<
     C = RenderWithContext.ComponentUnderTest,
     P = RenderWithContext.ProviderRef,
     O = RenderWithContext.OptionsArg,
@@ -41,7 +41,7 @@ declare function renderWithContext<
  *~ --esModuleInterop is turned on:
  *~   import * as x from '[~THE MODULE~]'; // WRONG! DO NOT DO THIS!
  */
-export declare namespace RenderWithContext {
+declare namespace RenderWithContext {
     export type ComponentUnderTest = ReactElement;
     export type ProviderRef = any; // TODO: should use React.Provider<any>
     export type OptionsArg = RenderOptions & {
@@ -52,7 +52,7 @@ export declare namespace RenderWithContext {
     export type AmbiguousObject = Record<string, any>;
 
     export type TypedReturn =
-        ReturnType<RenderResult> & { user: ReturnType<typeof userEvent['setup']> };
+        RenderResult & { user: ReturnType<typeof userEvent['setup']> };
 
 
     // TODO: maybe remove these?
