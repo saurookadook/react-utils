@@ -3,7 +3,7 @@ import { defineConfig, type Options } from "tsup";
 const sharedConfig: Options = {
     clean: true,
     dts: true, // Generate declaration files (.d.ts)
-    entryPoints: ['./src/index.ts'],
+    entryPoints: ['./src/index.tsx'],
     external: ['react'],
     /**
      * @todo Implement this once declaration files are supported
