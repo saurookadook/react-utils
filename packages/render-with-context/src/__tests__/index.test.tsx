@@ -1,7 +1,7 @@
 import * as React from 'react';
 const { createContext, useContext, useEffect, useReducer } = React;
 import { cleanup, screen, waitFor } from '@testing-library/react';
-import combineReducers, { type CombineReducers } from '@saurookkadookk/react-utils-combine-reducers';
+import combineReducers from '@saurookkadookk/react-utils-combine-reducers';
 
 import { deeplyMerge } from '../deeplyMerge';
 import renderWithContext from '../index';
@@ -44,10 +44,10 @@ const MockStateContext = createContext<MockStateStore>({
     user: {},
 });
 
-type MockDispatch = React.Dispatch<CombineReducers.ReducerAction<any>>;
+type MockDispatch = React.Dispatch<combineReducers.ReducerAction<any>>;
 const MockDispatchContext = createContext<MockDispatch>((action) => action);
 
-const mockLocalsReducer: CombineReducers.ArgsTuple<MockStateStore['locals']> = [
+const mockLocalsReducer: combineReducers.ArgsTuple<MockStateStore['locals']> = [
     (stateSlice, action) => {
         switch (action.type) {
             case mockActions.INCREMENT_COUNT:
@@ -62,7 +62,7 @@ const mockLocalsReducer: CombineReducers.ArgsTuple<MockStateStore['locals']> = [
     },
 ];
 
-const mockPageDataReducer: CombineReducers.ArgsTuple<MockStateStore['pageData']> = [
+const mockPageDataReducer: combineReducers.ArgsTuple<MockStateStore['pageData']> = [
     (stateSlice, action) => {
         switch (action.type) {
             case mockActions.INIT_PAGE:
@@ -77,7 +77,7 @@ const mockPageDataReducer: CombineReducers.ArgsTuple<MockStateStore['pageData']>
     null,
 ];
 
-const mockUserReducer: CombineReducers.ArgsTuple<MockStateStore['user']> = [
+const mockUserReducer: combineReducers.ArgsTuple<MockStateStore['user']> = [
     (stateSlice, action) => {
         switch (action.type) {
             case mockActions.INIT_PAGE:

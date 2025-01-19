@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { deeplyMerge } from './deeplyMerge';
-import type { RenderWithContext } from './index.d';
+import type RenderWithContext from './index.d';
 
 /**
  * @function renderWithContext
@@ -23,7 +23,8 @@ function renderWithContext(
         state = {}, // force formatting
         ...renderOptions
     }: any = {},
-): RenderWithContext.TypedReturn {
+    // ): RenderWithContext.TypedReturn {
+) {
     const baseState = deeplyMerge({}, state);
     return {
         ...render(

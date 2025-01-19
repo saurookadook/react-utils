@@ -79,5 +79,6 @@ function combineReducers<S extends CombineReducers.AmbiguousObject>(
     ];
 }
 
-export { CombineReducers };
+// TODO: need to figure out a way to export this type from the published build
+export { type CombineReducers };
 export default combineReducers;
