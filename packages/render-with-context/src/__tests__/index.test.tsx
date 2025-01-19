@@ -1,14 +1,36 @@
 import * as React from 'react';
 const { createContext, useContext, useEffect, useReducer } = React;
 import { cleanup, screen, waitFor } from '@testing-library/react';
-import { combineReducers } from '@saurookkadookk/react-utils-combine-reducers';
+import combineReducers, { type CombineReducers } from '@saurookkadookk/react-utils-combine-reducers';
 
-import { deeplyMerge } from '../lib/deeplyMerge';
-import renderWithContext from '../lib';
+import { deeplyMerge } from '../deeplyMerge';
+import renderWithContext from '../index';
 
-type ReducerAction<T> = {
-    type: string;
-    payload?: T | { [K in keyof T]: T[K] } | any; // TODO: short term fix
+type NullishValue<V> = V | null;
+
+type LocalsStateSlice = {
+    count: number;
+    flashMessages?: string[];
+    pathname?: string;
+}
+
+type PageDataStateSlice = {
+    certainty?: number;
+    data?: string[];
+    sentiment?: string;
+    stockSlug?: string;
+};
+
+type UserStateSlice = {
+    firstName?: string;
+    lastName?: string;
+    isBlocked?: boolean;
+};
+
+type MockStateStore = {
+    locals: LocalsStateSlice;
+    pageData: NullishValue<PageDataStateSlice>;
+    user: NullishValue<UserStateSlice>;
 };
 
 const mockActions = {
@@ -16,20 +38,16 @@ const mockActions = {
     INIT_PAGE: 'INIT_PAGE',
 };
 
-type MockStateStore = {
-    locals: { count: number };
-    pageData: PageDataStateSlice;
-    user: UserStateSlice;
-};
-
 const MockStateContext = createContext<MockStateStore>({
     locals: { count: 0 },
     pageData: {},
     user: {},
 });
-const MockDispatchContext = createContext<React.Dispatch<ReducerAction<any>>>((action) => action);
 
-const mockLocalsStateSlice = [
+type MockDispatch = React.Dispatch<CombineReducers.ReducerAction<any>>;
+const MockDispatchContext = createContext<MockDispatch>((action) => action);
+
+const mockLocalsReducer: CombineReducers.ArgsTuple<MockStateStore['locals']> = [
     (stateSlice, action) => {
         switch (action.type) {
             case mockActions.INCREMENT_COUNT:
@@ -44,7 +62,7 @@ const mockLocalsStateSlice = [
     },
 ];
 
-const mockPageDataStateSlice = [
+const mockPageDataReducer: CombineReducers.ArgsTuple<MockStateStore['pageData']> = [
     (stateSlice, action) => {
         switch (action.type) {
             case mockActions.INIT_PAGE:
@@ -59,7 +77,7 @@ const mockPageDataStateSlice = [
     null,
 ];
 
-const mockUserStateSlice = [
+const mockUserReducer: CombineReducers.ArgsTuple<MockStateStore['user']> = [
     (stateSlice, action) => {
         switch (action.type) {
             case mockActions.INIT_PAGE:
@@ -75,29 +93,16 @@ const mockUserStateSlice = [
 ];
 
 const [mockCombinedReducer, mockCombinedDefaultState] = combineReducers({
-    locals: mockLocalsStateSlice,
-    pageData: mockPageDataStateSlice,
-    user: mockUserStateSlice,
+    locals: mockLocalsReducer,
+    pageData: mockPageDataReducer,
+    user: mockUserReducer,
 });
-
-type PageDataStateSlice = {
-    certainty?: number;
-    data?: string[];
-    sentiment?: string;
-    stockSlug?: string;
-};
 
 const initialPageDataStateSlice: PageDataStateSlice = {
     certainty: 0.99,
     data: ['stuff', 'moar stuff', 'furrballz'],
     sentiment: 'SUPER GREAT',
     stockSlug: 'MEOW',
-};
-
-type UserStateSlice = {
-    firstName?: string;
-    lastName?: string;
-    isBlocked?: boolean;
 };
 
 const initialUserStateSlice: UserStateSlice = {
@@ -119,7 +124,7 @@ const MockProvider = ({ children, initialState }) => {
     const [state, dispatch] = useReducer(mockCombinedReducer, recursivelyMergedState);
 
     return (
-        <MockStateContext.Provider value={state}>
+        <MockStateContext.Provider value={state as MockStateStore}>
             <MockDispatchContext.Provider value={dispatch}>{children}</MockDispatchContext.Provider>
         </MockStateContext.Provider>
     );
