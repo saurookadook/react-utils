@@ -1,6 +1,6 @@
 {
     "name": "@saurookkadookk/react-utils-use-previous",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "author": "Andy Maskiell",
     "description": "A custom utility hook for getting the previous value of some variable within in a component.",
     "type": "module",
