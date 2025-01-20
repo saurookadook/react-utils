@@ -1,4 +1,24 @@
-# React + TypeScript + Vite
+# React Utils
+
+🚧 _WIP_ 🚧
+
+## Packages
+
+- [combineReducers](./packages/combine-reducers/README.md)
+- [renderWithContext](./packages/render-with-context/README.md)
+
+---
+
+## Building Types for Packages
+
+- [How do I add types to a Vite library build?](https://stackoverflow.com/questions/71982849/how-do-i-add-types-to-a-vite-library-build)
+- [Type definitions are not generated for library mode build](https://github.com/vitejs/vite/issues/2049)
+
+---
+
+## From Template README
+
+### React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -7,7 +27,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+#### Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 

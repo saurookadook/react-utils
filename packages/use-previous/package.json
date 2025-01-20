@@ -1,8 +1,13 @@
 {
     "name": "@saurookkadookk/react-utils-use-previous",
-    "version": "0.0.1",
+    "version": "0.4.0",
     "author": "Andy Maskiell",
     "description": "A custom utility hook for getting the previous value of some variable within in a component.",
+    "type": "module",
+    "types": "dist/esm/index.d.ts",
+    "browser": "dist/esm/index.js",
+    "main": "dist/commonjs/index.cjs",
+    "module": "dist/esm/index.js",
     "publishConfig": {
         "access": "public"
     },
@@ -20,21 +25,28 @@
     "exports": {
         ".": {
             "import": {
-                "types": "./dist/node/index.d.ts",
-                "default": "./dist/node/index.js"
+                "types": "./dist/esm/index.d.ts",
+                "default": "./dist/esm/index.js"
             },
             "require": {
-                "types": "./dist/node/index.d.cts",
-                "default": "./dist/node/index.cjs"
+                "types": "./dist/commonjs/index.d.cts",
+                "default": "./dist/commonjs/index.cjs"
             }
         },
         "./package.json": "./package.json"
     },
+    "files": [
+        "dist",
+        "src",
+        "./package.json"
+    ],
     "engines": {
         "node": "^18.0.0 || >=20.0.0"
     },
     "scripts": {
-        "build": "rimraf dist && tsc -b --verbose && pnpm vite build",
+        "build": "pnpm build:tsup",
+        "build:tsup": "rimraf dist && tsup ./src/index.ts",
+        "build:vite": "rimraf dist && tsc -b --verbose && pnpm vite build",
         "build:vite-example": "rimraf dist && pnpm build-bundle && pnpm build-types",
         "build-bundle": "rollup --config rollup.config.ts --configPlugin esbuild",
         "build-types": "pnpm build-types-temp && pnpm build-types-roll && pnpm build-types-check",

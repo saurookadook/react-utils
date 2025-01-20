@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "jsx": "react-jsx",
         "skipLibCheck": true,
         /* Bundler mode */
         "moduleResolution": "Bundler",

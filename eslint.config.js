@@ -102,6 +102,31 @@ export default tseslint.config(
         },
     },
     {
+        extends: [js.configs.recommended, ...tseslint.configs.recommended],
+        files: ['**/*.config.ts'],
+        ignores: [
+            'build',
+            'coverage',
+            'dist',
+            'node_modules',
+        ],
+        languageOptions: {
+            ecmaVersion: 2020,
+            globals: {
+                ...globals.jest,
+                ...globals['shared-node-browser'],
+                ...globals.node,
+            },
+            /**
+             * @description The type of JavaScript source code. Possible values are "script"
+             *  for traditional script files, "module" for ECMAScript modules (ESM), and
+             *  "commonjs" for CommonJS files. (default: "module" for .js and .mjs files;
+             *  "commonjs" for .cjs files)
+             */
+            sourceType: 'module',
+        },
+    },
+    {
         files: ['**/*.d.ts'],
         rules: {
             ..._rules,
@@ -120,9 +145,9 @@ export default tseslint.config(
     },
     {
         files: ['.prettierrc.js'],
-        languageOptions: {
-            sourceType: 'commonjs',
-        },
+        // languageOptions: {
+        //     sourceType: 'commonjs',
+        // },
         rules: {
             ..._rules,
             'no-undef': 0,

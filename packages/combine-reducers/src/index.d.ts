@@ -1,6 +1,5 @@
-
-// Type definitions for [~THE LIBRARY NAME~] [~OPTIONAL VERSION NUMBER~]
-// Project: [~THE PROJECT NAME~]
+// Type definitions for `@saurookkadookk/react-utils-combine-reducers` '0.3.0'
+// Project: `react-utils` <https://github.com/saurookadook/react-utils>
 // Definitions by: Andy Maskiell <https://waitwut.xyz>
 
 // Note that ES6 modules cannot directly export class objects.
@@ -18,6 +17,10 @@
 
 import type { Reducer } from 'react';
 
+export = CombineReducers;
+
+declare function CombineReducers<S extends CombineReducers.AmbiguousObject>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.TypedReturn<S>;
+
 /*~ If you want to expose types from your module as well, you can
  *~ place them in this block. Often you will want to describe the
  *~ shape of the return type of the function; that type should
@@ -28,7 +31,7 @@ import type { Reducer } from 'react';
  *~ --esModuleInterop is turned on:
  *~   import * as x from '[~THE MODULE~]'; // WRONG! DO NOT DO THIS!
  */
-export declare namespace CombineReducers {
+declare namespace CombineReducers {
     // export type AmbiguousObject<V = unknown> = Record<string, V>;
     export type AmbiguousObject = Record<string, any>;
 
@@ -49,7 +52,7 @@ export declare namespace CombineReducers {
         [Slice in keyof S as string]: [ReducerFunc<S[Slice]>, S[Slice]];
     }
 
-    export type ReturnType<S> = ArgsTuple<S>;
+    export type TypedReturn<S> = ArgsTuple<S>;
 
 
     // TODO: maybe remove these?

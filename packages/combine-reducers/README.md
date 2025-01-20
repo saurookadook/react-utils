@@ -3,7 +3,29 @@
 A React-hooks friendly utility to combine several reducer functions into a singular reducer function. It is inspired by:
 
 -   [`combineReducers` from Redux](https://github.com/reduxjs/redux/blob/master/src/combineReducers.ts)
--   [`combineReducers` from the `react-combine-reducers` package](https://github.com/ankita1010/react-combine-reducers/blob/master/src/utility.js).
+-   [`combineReducers` from the `react-combine-reducers` package](https://github.com/ankita1010/react-combine-reducers/blob/master/src/utility.js)
+
+🚧 _WIP_ 🚧
+
+## Installing
+
+**with `npm`**
+
+```sh
+$ npm install @saurookkadookk/react-utils-combine-reducers
+```
+
+**with `pnpm`**
+
+```sh
+$ pnpm add @saurookkadookk/react-utils-combine-reducers
+```
+
+**with `Yarn`**
+
+```sh
+$ yarn add @saurookkadookk/react-utils-combine-reducers
+```
 
 ## Rationale
 
