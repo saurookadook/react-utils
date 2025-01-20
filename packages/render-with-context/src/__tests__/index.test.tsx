@@ -193,7 +193,7 @@ describe('renderWithContext utility', () => {
     });
 
     it('should render the component under test', async () => {
-        jest.useFakeTimers();
+        jest.useFakeTimers({ advanceTimers: true });
         renderWithContext(<MockComponentUnderTest />, MockProvider);
 
         /**
@@ -204,14 +204,18 @@ describe('renderWithContext utility', () => {
             expect(screen.getByLabelText('Loading...')).toBeVisible();
         });
 
-        jest.runOnlyPendingTimers();
+        let stateSlicesElement;
 
         await waitFor(() => {
-            const stateSlicesElement = screen.getByLabelText('state slices');
-            expect(stateSlicesElement).toBeVisible();
-            expect(stateSlicesElement.querySelectorAll('#pageData > li')).toHaveLength(4);
-            expect(stateSlicesElement.querySelectorAll('#user > li')).toHaveLength(3);
+            stateSlicesElement = screen.getByLabelText('state slices');
+            expect(stateSlicesElement).not.toBeNull();
+            expect(stateSlicesElement).not.toBeEmptyDOMElement();
         });
+
+        expect(stateSlicesElement).toBeVisible();
+        expect(stateSlicesElement.querySelectorAll('#pageData > li')).toHaveLength(4);
+        expect(stateSlicesElement.querySelectorAll('#user > li')).toHaveLength(3);
+
         jest.useRealTimers();
     });
 
