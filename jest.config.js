@@ -7,12 +7,14 @@ export default {
         "\\.(css|less|sass|scss)$": "identity-obj-proxy",
         "^.+\\.svg$": "jest-transformer-svg",
     },
-    // setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
-    // testEnvironment: "jsdom",
+    preset: "ts-jest",
+    setupFilesAfterEnv: ['<rootDir>/jest-setup.ts'],
+    testEnvironment: "jsdom",
     testPathIgnorePatterns: [
         ".+\.d.ts",
     ],
     transform: {
-        "^.+\.tsx?$": ["ts-jest", {}],
+        // "^.+\.(ts|tsx)$": ["ts-jest", {}],
+        "^.+\.(ts|tsx)$": ["ts-jest", { tsconfig: './tsconfig.json' }],
     },
 };

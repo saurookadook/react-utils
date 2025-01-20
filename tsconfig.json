@@ -1,4 +1,13 @@
 {
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "jsx": "react-jsx",
+        "types": [
+            "@testing-library/jest-dom",
+            "jest",
+            "node"
+        ]
+    },
     "files": [],
     "exclude": [
         "coverage",

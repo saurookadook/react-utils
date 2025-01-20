@@ -1,4 +1,4 @@
-import type { CombineReducers } from './index.d';
+import type CombineReducers from './index.d';
 
 // type FinalReducersFuncMap_PREFERRABLE<T> = {
 //     [K in keyof T as string]: CombineReducers.ReducerFunc<T[K]>;
@@ -22,7 +22,9 @@ type FinalReducersFuncMap<S> = {
  *      (i.e. feedback: feedbackReducer, question: questionReducer)
  * @returns {CombinedStateSliceReducer} Array with a combinedReducer function and combinedState
  */
-function combineReducers<S extends CombineReducers.AmbiguousObject>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.ReturnType<S> {
+function combineReducers<S extends CombineReducers.AmbiguousObject>(
+    reducers: CombineReducers.ReducersArg<S>,
+): CombineReducers.TypedReturn<S> {
     const reducerKeys = Object.keys(reducers);
     const globalState = {} as GlobalState<S>;
     const finalReducers = {} as FinalReducersFuncMap<S>;
@@ -77,5 +79,6 @@ function combineReducers<S extends CombineReducers.AmbiguousObject>(reducers: Co
     ];
 }
 
-export { CombineReducers };
+// TODO: need to figure out a way to export this type from the published build
+export { type CombineReducers };
 export default combineReducers;

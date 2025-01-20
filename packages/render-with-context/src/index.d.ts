@@ -1,4 +1,4 @@
-// Type definitions for `@saurookkadookk/react-utils-combine-reducers` '0.3.0'
+// Type definitions for `@saurookkadookk/react-utils-render-with-context` '0.1.0'
 // Project: `react-utils` <https://github.com/saurookadook/react-utils>
 // Definitions by: Andy Maskiell <https://waitwut.xyz>
 
@@ -15,11 +15,21 @@
 // https://www.typescriptlang.org/docs/handbook/modules.html#export--and-import--require
 // to understand common workarounds for this limitation of ES6 modules.
 
-import type { Reducer } from 'react';
+import type { ReactElement } from 'react';
+import { type RenderResult, RenderOptions } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-export = CombineReducers;
+export = RenderWithContext;
 
-declare function CombineReducers<S extends CombineReducers.AmbiguousObject>(reducers: CombineReducers.ReducersArg<S>): CombineReducers.TypedReturn<S>;
+declare function RenderWithContext<
+    C = RenderWithContext.ComponentUnderTest,
+    P = RenderWithContext.ProviderRef,
+    O = RenderWithContext.OptionsArg,
+>(
+    component: C,
+    ProviderRef: P,
+    options?: O,
+): RenderWithContext.TypedReturn;
 
 /*~ If you want to expose types from your module as well, you can
  *~ place them in this block. Often you will want to describe the
@@ -31,28 +41,18 @@ declare function CombineReducers<S extends CombineReducers.AmbiguousObject>(redu
  *~ --esModuleInterop is turned on:
  *~   import * as x from '[~THE MODULE~]'; // WRONG! DO NOT DO THIS!
  */
-declare namespace CombineReducers {
+declare namespace RenderWithContext {
+    export type ComponentUnderTest = ReactElement;
+    export type ProviderRef = any; // TODO: should use React.Provider<any>
+    export type OptionsArg = RenderOptions & {
+        state?: AmbiguousObject;
+    };
+
     // export type AmbiguousObject<V = unknown> = Record<string, V>;
     export type AmbiguousObject = Record<string, any>;
 
-    export type StateSlice<S> = {
-        [K in keyof S]: S[K];
-    } | S;
-
-    export type ReducerAction<T> = {
-        type: string;
-        payload?: T | { [K in keyof T]: T[K] } | any; // TODO: short term fix
-    };
-
-    export type ReducerFunc<T, A = ReducerAction<T>> = Reducer<T, A>
-
-    export type ArgsTuple<T, A = ReducerAction<T>> = [ReducerFunc<T, A>, T];
-
-    export type ReducersArg<S> = {
-        [Slice in keyof S as string]: [ReducerFunc<S[Slice]>, S[Slice]];
-    }
-
-    export type TypedReturn<S> = ArgsTuple<S>;
+    export type TypedReturn =
+        RenderResult & { user: ReturnType<typeof userEvent['setup']> };
 
 
     // TODO: maybe remove these?

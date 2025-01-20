@@ -1,6 +1,6 @@
 {
     "name": "@saurookkadookk/react-utils-combine-reducers",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "author": "Andy Maskiell",
     "description": "A utility, for use with React's `useReducer` hook, to combine multiple reducer functions into a single reducer function.",
     "type": "module",
@@ -47,6 +47,7 @@
     "scripts": {
         "build": "pnpm build:tsup",
         "build:tsup": "rimraf dist && tsup ./src/index.ts",
+        "build:vite": "rimraf dist && tsc -b --verbose && pnpm vite build",
         "build:vite-example": "rimraf dist && pnpm build-bundle && pnpm build-types",
         "build-bundle": "rollup --config rollup.config.ts --configPlugin esbuild",
         "build-types": "pnpm build-types-temp && pnpm build-types-roll && pnpm build-types-check",
