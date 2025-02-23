@@ -1,4 +1,4 @@
-// Type definitions for `@saurookkadookk/react-utils-render-with-context` '0.1.0'
+// Type definitions for `@saurookkadookk/react-utils-render-with-context` '1.0.0'
 // Project: `react-utils` <https://github.com/saurookadook/react-utils>
 // Definitions by: Andy Maskiell <https://waitwut.xyz>
 

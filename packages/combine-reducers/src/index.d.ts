@@ -1,4 +1,4 @@
-// Type definitions for `@saurookkadookk/react-utils-combine-reducers` '0.3.0'
+// Type definitions for `@saurookkadookk/react-utils-combine-reducers` '1.0.0'
 // Project: `react-utils` <https://github.com/saurookadook/react-utils>
 // Definitions by: Andy Maskiell <https://waitwut.xyz>
 
