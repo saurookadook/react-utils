@@ -1,6 +1,6 @@
 {
     "name": "@saurookkadookk/react-utils-render-with-context",
-    "version": "0.4.0",
+    "version": "1.0.0",
     "author": "Andy Maskiell <maskiella@gmail.com>",
     "description": "Testing utility for rendering stateful components with Testing Library",
     "type": "module",

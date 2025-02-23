@@ -1,6 +1,6 @@
 {
     "name": "@saurookkadookk/react-utils-combine-reducers",
-    "version": "0.4.0",
+    "version": "1.0.0",
     "author": "Andy Maskiell",
     "description": "A utility, for use with React's `useReducer` hook, to combine multiple reducer functions into a single reducer function.",
     "type": "module",
