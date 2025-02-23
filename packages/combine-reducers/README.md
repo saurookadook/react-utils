@@ -2,8 +2,8 @@
 
 A React-hooks friendly utility to combine several reducer functions into a singular reducer function. It is inspired by:
 
--   [`combineReducers` from Redux](https://github.com/reduxjs/redux/blob/master/src/combineReducers.ts)
--   [`combineReducers` from the `react-combine-reducers` package](https://github.com/ankita1010/react-combine-reducers/blob/master/src/utility.js)
+- [`combineReducers` from Redux](https://github.com/reduxjs/redux/blob/master/src/combineReducers.ts)
+- [`combineReducers` from the `react-combine-reducers` package](https://github.com/ankita1010/react-combine-reducers/blob/master/src/utility.js)
 
 🚧 _WIP_ 🚧
 
@@ -27,10 +27,98 @@ $ pnpm add @saurookkadookk/react-utils-combine-reducers
 $ yarn add @saurookkadookk/react-utils-combine-reducers
 ```
 
+## Usage
+
+`combineReducers` is intended to be used in conjunction with [React's `useReducer` hook](https://react.dev/reference/react/useReducer) and [the `Provider` pattern exemplified React's docs](https://react.dev/learn/scaling-up-with-reducer-and-context#moving-all-wiring-into-a-single-file).
+
+A wholistic, simple example would look like the following:
+
+```jsx
+// store/reducers/index.js
+import combineReducers from '@saurookkadookk/react-utils-combine-reducers';
+
+const defaultItemsStateSlice = null;
+
+const itemsStateSlice = [
+    (stateSlice, action) => {
+        switch (action.type) {
+            case 'SET_ITEMS':
+                return stateSlice == null
+                    ? action.payload.items
+                    : [...stateSlice, ...action.payload.items];
+            default:
+                return stateSlice
+        }
+    },
+    defaultItemsStateSlice
+];
+
+const defaultSettingsStateSlice = {
+    menu: {
+        collapsed: false,
+        placement: 'left',
+    },
+    muted: false,
+    theme: 'light',
+};
+
+const settingsStateSlice = [
+    (stateSlice, action) => {
+        switch (action.type) {
+            case 'TOGGLE_MENU_STATE':
+                stateSlice.menu.collapsed = !stateSlice.menu.collapsed;
+                return stateSlice;
+            case 'SET_THEME':
+                stateSlice.theme = action.payload.theme;
+                return stateSlice
+            default:
+                return stateSlice
+        }
+    },
+    defaultSettingsStateSlice
+];
+
+export default combineReducers({
+    items: itemsStateSlice,
+    settings: settingsStateSlice,
+});
+
+// store/context.js
+import { createContext } from 'react';
+
+export const StateContext = createContext(null);
+export const DispatchContext = createContext(null);
+
+// store/StoreProvider.js
+import React, { useReducer } from 'react';
+
+import { StateContext, DispatchContext } from './context';
+import combinedReducer from './reducer';
+
+const StoreProvider = ({
+    children,
+    initialState,
+}) => {
+    const [combinedReducerFunc, combinedDefaultState] = combinedReducer;
+
+    // in practice, you should use something that recursively merges objects
+    const mergedState = Object.assign(combinedDefaultState, initialState);
+    const [state, dispatch] = useReducer(combinedReducerFunc, mergedState);
+
+    return (
+        <StateContext.Provider value={state}>
+            <DispatchContext.Provider value={dispatch}>
+                {children}
+            </DispatchContext.Provider>
+        </StateContext.Provider>
+    );
+};
+
+```
+
 ## Rationale
 
-The `combineReducers` utility was born out of a need to keep our reducer functions pure, by which I mean that a reducer
-function should only manipulate a single slice of state.
+The `combineReducers` utility was born out of a need to keep our reducer functions pure, by which I mean that a reducer function should only manipulate a single slice of state.
 
 Let's consider the following shape of `state` for a hypothetical application:
 
@@ -60,8 +148,7 @@ const state = {
 }
 ```
 
-Without the `combineReducers` utility, for example, our reducer function would have to manipulate _all_ of these state
-slices:
+Without the `combineReducers` utility, for example, our reducer function would have to manipulate _all_ of these state slices:
 
 ```js
 import {
@@ -150,11 +237,9 @@ export const applicationReducer = (state = defaultState, action) => {
 };
 ```
 
-While this is a relatively small example, you can perhaps imagine how this could be difficult to manage in bigger
-applications. 😅
+While this is a relatively small example, you can perhaps imagine how this could become increasingly difficult to maintain as an application grows. 😅
 
-However, the `combineReducers` utility allows us to roll up reducer functions for individual parts of state into a
-singular reducer function:
+However, the `combineReducers` utility allows us to roll up reducer functions for individual parts of state into a singular reducer function:
 
 ```js
 import {
@@ -268,9 +353,9 @@ export default combineReducers({ flashMessage, local, toDoItems, user });
 
 A couple of the notable benefits include:
 
--   **separation of responsibility**: Each reducer function _only_ affects a single slice of `state`.
--   **debuggability**: If a slice of state isn't being updated/changed/etc. in the application's `reducer` the way you
-would expect, you can immediately narrow your debugging to the function corresponding to the state slice in question.
+- **separation of responsibility**: Each reducer function _only_ affects a single slice of `state`.
+- **debuggability**: If a slice of state isn't being updated/changed/etc. in the application's `reducer` the way you would expect, you can immediately narrow your debugging to the function corresponding to the state slice in question.
+
 <!--
     TODO: others?
     - less error-prone
@@ -287,7 +372,7 @@ would expect, you can immediately narrow your debugging to the function correspo
 
 <summary>
 
-`Provider` component
+**`Provider` component**
 
 </summary>
 
@@ -313,7 +398,9 @@ const Provider = ({ children, initialState }) => {
 
     return (
         <StateContext.Provider value={state}>
-            <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
+            <DispatchContext.Provider value={dispatch}>
+                {children}
+            </DispatchContext.Provider>
         </StateContext.Provider>
     );
 };
@@ -334,7 +421,7 @@ _(This is probably closer to its use in practice)_
 
 <summary>
 
-`base` reducer
+**`base` reducer**
 
 </summary>
 
@@ -402,7 +489,7 @@ export { session, system, user };
 
 <summary>
 
-`graph` reducer
+**`graph` reducer**
 
 </summary>
 
@@ -452,7 +539,7 @@ export default combineReducers({
 
 <summary>
 
-Combined reducer
+**Combined reducer**
 
 </summary>
 
@@ -479,7 +566,7 @@ export default combineReducers({
 
 <summary>
 
-`Provider` component
+**`Provider` component**
 
 </summary>
 
@@ -509,7 +596,9 @@ const Provider = ({ children, initialState }) => {
 
     return (
         <StateContext.Provider value={state}>
-            <DispatchContext.Provider value={dispatch}>{children}</DispatchContext.Provider>
+            <DispatchContext.Provider value={dispatch}>
+                {children}
+            </DispatchContext.Provider>
         </StateContext.Provider>
     );
 };
