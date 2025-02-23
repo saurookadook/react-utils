@@ -1,11 +1,16 @@
 # React Utils
 
-🚧 _WIP_ 🚧
+A collection of useful, lightweight utilities for use in [React](https://react.dev/) applications.
 
 ## Packages
 
 - [combineReducers](./packages/combine-reducers/README.md)
 - [renderWithContext](./packages/render-with-context/README.md)
+- [usePrevious](./packages/render-with-context/README.md)
+
+## Docs
+
+- [State Management](./docs/STATE_MANAGEMENT.md)
 
 ---
 
