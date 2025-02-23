@@ -1,8 +1,6 @@
 # `@saurookkadookk/react-utils-render-with-context`
 
-<!-- TODO: description -->
-
-🚧 _WIP_ 🚧
+A testing utility for testing components that are hooked up to [a state provider](https://react.dev/learn/scaling-up-with-reducer-and-context). _(For more details, see [Caveats](#caveats).)_
 
 ## Installing
 
@@ -25,8 +23,6 @@ $ yarn add @saurookkadookk/react-utils-render-with-context
 ```
 
 ## Usage
-
-A testing utility for testing components that are hooked up to [a state provider](https://react.dev/learn/scaling-up-with-reducer-and-context).
 
 ```jsx
 import { screen, waitFor } from '@testing-library/react';
@@ -65,7 +61,11 @@ describe('StatefulComponent tests', () => {
 
 ```
 
-### Caveat
+### Typing
+
+🚧 **WIP** 🚧
+
+### Caveats
 
 Please note that `renderWithContext` assumes that you have a `Provider` component following the pattern from [React's docs](https://react.dev/learn/scaling-up-with-reducer-and-context#moving-all-wiring-into-a-single-file) and that accepts an `initialState` prop. For example:
 
